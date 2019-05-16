@@ -1,0 +1,1854 @@
+\documentclass{NSF}
+
+
+  \usepackage[T1]{fontenc} 
+    \usepackage{textcomp} 
+   \usepackage{mathpazo} 
+   \usepackage{framed}
+   
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\pagestyle{plain}                                                      %%
+%%%%%%%%%% EXACT 1in MARGINS %%%%%%%                                   %%
+% %\setlength{\textwidth}{6.5in}     %%                                   %%
+% \setlength{\oddsidemargin}{0in}   %% (It is recommended that you       %%
+% \setlength{\evensidemargin}{0in}  %%  not change these parameters,     %%
+% \setlength{\textheight}{8.5in}    %%  at the risk of having your       %%
+% \setlength{\topmargin}{0in}       %%  proposal dismissed on the basis  %%
+% \setlength{\headheight}{0in}      %%  of incorrect formatting!!!)      %%
+% \setlength{\headsep}{0in}         %%                                   %%
+% \setlength{\footskip}{.5in}    
+
+\usepackage{epstopdf}
+\epstopdfDeclareGraphicsRule{.gif}{png}{.png}{convert gif:#1 png:\OutputFile}
+\AppendGraphicsExtensions{.gif}
+\usepackage{rotating}
+
+\usepackage{colortbl}
+\usepackage{wrapfig}
+ 
+
+\definecolor{maroon}{cmyk}{0,0.87,0.68,0.32}
+\setlength{\parskip}{0.5mm}
+\usepackage{indentfirst}
+\setlength{\parindent}{0.75cm}
+
+
+\newcommand{\quart}[4]{\begin{picture}(80,4)%1
+    {\color{black}\put(#3,2){\circle*{4}}\put(#1,2){\line(1,0){#2}}}\end{picture}}
+
+\usepackage{longtable}
+\usepackage[most]{tcolorbox}
+\usepackage{caption}
+\usepackage{multirow}
+\usepackage{comment}
+\usepackage{pifont}
+\usepackage{array}
+\usepackage{enumitem}
+
+\newenvironment{myitemize}
+{ \begin{itemize}
+    \setlength{\itemsep}{0pt}
+    \setlength{\parskip}{0pt}
+    \setlength{\parsep}{0pt}     }
+{ \end{itemize}                  } 
+
+
+\newenvironment{mysmallize}
+{ \begin{itemize}[leftmargin=*,topsep=0pt]
+    \setlength{\itemsep}{0pt}
+    \setlength{\parskip}{0pt}
+    \setlength{\parsep}{0pt}     }
+{ \end{itemize}                  } 
+
+
+\newenvironment{mynumns}
+{ \begin{enumerate}
+    \setlength{\itemsep}{0pt}
+    \setlength{\parskip}{0pt}
+    \setlength{\parsep}{0pt}     }
+{ \end{enumerate}   }
+ 
+ \definecolor{ao(english)}{rgb}{0.0, 0.5, 0.0}
+    
+
+\newcommand{\be}{\begin{mynumns}}
+\newcommand{\ee}{\end{mynumns}}
+
+\newcommand{\bi}{\begin{myitemize}}
+\newcommand{\ei}{\end{myitemize}}
+
+
+\newcommand{\bii}{\begin{mysmallize}}
+\newcommand{\eii}{\end{mysmallize}}
+
+\newcommand{\tion}[1]{\S\ref{tion:#1}}
+
+\newcommand{\tbl}[1]{Table~\ref{tbl:#1}}
+\newcommand{\fig}[1]{Figure~\ref{fig:#1}}
+
+\newcommand{\eq}[1]{Equation~\ref{eq:#1}}
+
+\usepackage[T1]{fontenc} 
+\usepackage{textcomp} 
+\usepackage{mathpazo} 
+   
+
+\definecolor{Gray}{gray}{0.9}
+
+\hyphenation{}
+
+\newcommand{\jnote}[1]{{\color{blue}[JEFF: #1]}}
+
+\newcommand{\IT}{{\bf {\sffamily SEnTRY}}}
+\newtheorem{criteria}{Evaluation Criteria}
+
+\usepackage[tikz]{bclogo}
+
+\usepackage{tikz}
+\def\checkmark{\tikz\fill[scale=0.3](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+\def\firstcircle{(90:1.75cm) circle (2.5cm)}
+\def\secondcircle{(210:1.75cm) circle (2.5cm)}
+\def\thirdcircle{(330:1.75cm) circle (2.5cm)}
+
+\newenvironment{eval}[1]%
+{\noindent\begin{minipage}[c]{\linewidth}%
+\begin{bclogo}[couleur=gray!25,%
+                arrondi=0.1, 
+                barre=zigzag,%
+                logo=\bcattention,%
+                ombre=true]{~#1}\begin{criteria}}%
+{\end{criteria}\end{bclogo}\end{minipage}\vspace{2mm}}
+
+\newcommand{\TITLE}{FAI:  Fairness is a Choice But Not
+Choosing is Unfair (The TINKER Project)}
+
+ \usepackage[labelfont=bf,font=bf]{caption}
+ \captionsetup{font+=sf}
+               
+               
+   
+\begin{document}
+\ProjectTitle{\TITLE}
+\ProjectAuthor{Tim Menzies, NC State}
+
+%\renewcommand{\attn}
+ 
+\begin{nsfsummary}
+\begin{center}
+{\bf \TITLE}\\\vspace{1mm}
+ Tim Menzies,  IEEE Fellow, NC State
+ \end{center}
+  Machine learning is increasingly being used to make decisions that affect peoples; day to day lives. Recent results warn that the software within many data mining packages exhibits "group discrimination"; i.e. their decisions are inappropriately affected by protected attributes (e.g., race, gender, age, etc.). We assert that it is the ethical duty of software engineers to strive to reduce such discrimination. This paper discusses how that might be done. There have been a research on fairness and algorithmic transparency in machine learning. Different groups apply different fairness operators to enhance their data miners. But the experience to date is that some of these operators lead to unacceptable loss in learner performance. 
+  
+  We diagnosis the problem as follows: during learning, {\bf if fairness is not known to be a goal}, then {\bf the learner will not generate fair models}. To fix this problem we propose moving the fairness goal into the model generation process. Specifically, we will explore if hyper-parameter optimization can automatically find tunings for learners such that they generate fair modes without losing predictive performance. Our preliminary results are promising. Hyper-parameter optimization can (a) preserve the predictive power of a model learned from a data miner while also (b) generates fairer results (where fairness is measured by the standard metrics suite supported by the AIF360 fairness suite https://github.com/IBM/AIF360). To the best of our knowledge, ours is the first application of hyper-parameter optimization as a tool for software engineers to generate fairer software. 
+  
+  There are problems with the above results. The improvements we can achieve with hyper-parameter optimization are "quirky" (they do not work equally as well on all data sets, for all fairness goals). We need to know more about what kinds of data/ fairness goals/ optimizers are best/worst suited to fairness optimization. Further, we suspect that standard optimizers (which may be very slow in practice) are "overkill" and that there exists a minimal set of very fast optimizers that can be applied to streaming data. The goal of this research is to find that minimal streaming optimizers. If successful, then fairness optimization could become a filter that can be easily added to any full stack data mining toolkit  
+
+
+\vspace{5mm}
+ \noindent
+\underline{{\bf INTELLECTUAL MERIT:}} 
+This novel work applies active learning and hyperparameter  optimization methods to tasks
+that are  central
+to the process of software development;
+e.g. defect prediction, test case prioritization, avoid spurious warnings, avoiding technical debt, etc.
+
+Moreover, this work explores how to extend prior standard
+SE methods to new kinds of software.
+Empirical SE has been mostly developed for tech giant (e.g. Facebook-, Google- and Microsoft-) style software. These three
+organizations
+are hardly representative of the vast
+ranges of  different software types in contemporary practice.  The methods of this proposal 
+ could be used to better adapt empirical SE to any other field of endeavor.
+
+
+ 
+ 
+\vspace{5mm}
+\noindent
+\underline{{\bf BROADER IMPACTS:}}
+We focus on an issue of tremendous economic importance---the creation of better quality software which in turn will be used to find new state-of-the-art research results
+in astronomy, astrophysics, chemistry, weather prediction, economics,  genomics,  molecular   biology,    oceanography, physics,  political  science,  and many engineering fields.
+For industrial and academic sectors, this work will accelerate global innovations by improving quality and quantity of computational scientific studies.
+
+The PI   teaches senior-level and graduate-level empirical SE, and data  mining classes (and in those data mining classes, all the case studies come from software  engineering). All of the technology developed in this proposal will become case study material for those subjects.  
+ 
+PI Menzies will continue his established tradition of graduating research students for historically under-represented groups. This work will inform the curriculum of  the various NC State  NSF-funded REUs (research experience for undergraduates)
+In that program, places are reserved for students from traditionally under-represented areas; e.g. economically challenged regions of the state of North Carolina) and/or students from universities lacking advanced research facilities. While some of the concepts of this grant would be too advanced for that group, some of the simpler concepts and case studies would be suitable for lectures.
+
+\vspace{5mm}
+
+\noindent \underline{{\bf KEYWORDS:}} computational science, empirical software engineering, software analytics
+\end{nsfsummary}
+
+
+\begin{nsfdescription}
+\thispagestyle{plain}
+ \begin{center}
+{\bf \TITLE}\\\vspace{1mm}
+{Tim Menzies,  IEEE Fellow,  NC State}
+ \end{center}
+
+
+ 
+
+
+
+ \section{Introduction}\label{tion:intro}
+ why not just throw away the attributes? not alldata sets are like adult etc. They may be inexerably
+ connected to the goal. So a learner will have to use them. goal then is ti use them the least amount.
+ 
+And if that dones not convince you, and you still want to discard them, Cant assess if they are useless (abd can be thrown away) if you dont see how well you can do without them or with minimal use of the those attributes. So something like TINKER is essential, just to gauge the extent to which the current data aset hasa. group discrimiantion problem.
+
+Lastly,we point out that if we list attributes to be trown away, that broadacts to someoe that this dat set has important effects included in the 
+discared set. This is the last thing any data provideor wnat sto broadcast to the broader community
+
+
+\begin{wrapfigure}{r}{4.5in}
+\includegraphics[width=1.45in]{fig/book1.png}\includegraphics[width=1.45in]{fig/book2.png}\includegraphics[width=1.45in]{fig/book3.jpg}
+\caption{PI Menzies has co-written    three textbooks about 
+empirical SE~\cite{menzies2014sharing,bird2015art,menzies2016perspectives}. But is any of that work relevant to
+ computational science?}\label{fig:books}
+\end{wrapfigure}
+What (if anything) can computational science
+learn from  empirical software engineering (SE)? 
+ Decades  of 
+     empirical SE has found
+      useful   quality assurance methods for Google, Facebook,
+Microsoft-style software (see \fig{books}). 
+But are such methods useful for software that explores (e.g.) 
+astronomy,  astrophysics,  chemistry,   weather prediction, economics, genomics, molecular biology,  oceanography,  physics,  political  science,  and  many engineering fields?
+
+This is an important question.
+Computational science is becoming
+more dependent on 
+software.
+For example, in 2013 a Nobel Prize went to chemists using computer
+models to explore    chemical reactions during photosynthesis. In the press release of the award,
+the Nobel Prize committee wrote ``Today the computer is just as important a tool for chemists as the  test
+tube''. 
+
+But building software is hard and building quality software is even harder. This is
+especially true in computational science
+where many software  developers have not formally studied computer science or software engineering.
+ The proposal claims that empirical SE methods can help bridge the skill gap via automatic
+ agents that can suggest to developers when (e.g.)  they should redo part of their code.
+ More specifically, we now make five claims (and this proposal is designed
+to test these claims): 
+\bi
+\item {\bf Claim1 = relevant:}   Empirical SE quality assurance {\em \underline{En}deavors}
+are relevant  to computational science.
+\item
+{\bf Claim2 = operational:}
+These endeavors can be applied via some
+{\em inst\underline{R}uments}. To ensure   scalability, we will use automatic instruments  based on some kind of data mining algorithm.
+\item 
+{\bf Claim3 = must adjust:}
+Those instruments require   {\em \underline{T}uning} for
+ computational science software. 
+\item
+{\bf Claim4 = practical:}
+There are   cost-effective {\em \underline{S}trategies}
+for   performing that tuning.
+\item
+{\bf Claim5 = valuable}
+After  tuning, those quality  assurance endeavors will {\em \underline{Y}ield}
+higher performance (e.g. more defect reduction) when applied to   computational science software.
+\ei
+The   components of these claims
+are 
+\underline{S}trategies, \underline{En}deavors, 
+\underline{T}uners,
+inst\underline{R}uments and \underline{Y}ield, a.k.a. $S, \mathit{En}, T,R,Y$.
+
+Our proposed {\IT} empirical software engineering workbench will
+contain all these componentss. {\IT}
+is intended to reduce the time needed for many tedious aspects of software development, thereby freeing up the time of computational scientists to think more about core scientific issues. The work described in this proposal
+will use {\IT} to collect the metrics required
+(see \tion{plan})
+to test Claims 1,2,3,4,5.
+
+Preliminary results offer some  initial support
+for these claims. As part of a recent  NSF EAGER proposal\footnote{OAC EAGER \#1826574.  Empirical Software Engineering for Computational Science. April 2018 to April 2019. PI= Tim Menzies.}, PI Menzies {\bf endeavored}
+ to perform defect prediction on nine computational science projects.
+The {\bf yield} (in this case, bug localization)
+was greatly increased after the {\bf instruments}  were {\bf  tuned}
+using an {\bf strategy} of active learning
+(compare the \textcolor{ForestGreen}{\bf GREEN} triangles  to
+the \textcolor{red}{\bf RED} squares  in Figure~2).
+That active learner discovered the specialized language
+used by computational scientists to describe their defects\footnote{
+More specifically, humans reviewed
+examples selected by
+an incremental support vector machine (via  reflecting on its support vectors)
+to find the next most informative example.}.
+We  presented these results to many computational scientists (via 
+numerous
+in-person conversations
+and a 2019 Gateway webinar youtu.be/WgoUFyQg4Js). Those presentations have garnered much interest in our methods,
+as evidenced by the \underline{{\bf eleven  letters of collaboration}}
+attached to this proposal. 
+
+\input{redgreen}
+
+To summarize those preliminary results,
+    empirical SE methods  were relevant to
+computational science (Claim1) and that empirical SE can be 
+be made operational (Claim2) after some adjustments (Claim3).
+The final analysis of Figure~2 took just a few weeks (once we had debugged our scripts)
+and was achieved with \$0 open source tools using standard desktop machines. Hence, we would
+say that this is a practical approach (Claim4) that was  valuable (Claim5)
+to defect prediction for computational science.
+
+
+
+But the case study of Figure~2 is somewhat limited
+(just nine projects) and explored just
+one endeavor (defect prediction). Therefore, we need
+more experience before 
+accepting (or rejecting) 
+  Claims 1,2,3,4,5.
+Accordingly,
+this proposal will explore the following {\bf endeavors}:
+\bi
+\item[(a)] Defect prediction.
+\item[(b)] Test  case  prioritization,  
+\item[(c)] Avoiding spurious warning messages;
+\item[(d)] Avoiding technical debt;
+\item[(e)] And others, as opportunity permits and as requested by the computational science community.
+\ei
+ \begin{wrapfigure}{r}{4.7in}
+ \includegraphics[width=4.7in]{fig/dealii.png}
+%\includegraphics[width=3in]{fig/openmm.png}
+%OpenMM. 2 million lines of code. 2008 to 2017. 
+\caption{Deal.II: 20 years of data. 8.4 million lines of code.  
+~\tbl{samples} has  more 
+ examples of   on-line
+ data from computational science  software projects.}\label{fig:dealii}
+\end{wrapfigure}We use these {\bf endeavors} since they
+ are well-explored   (see \tion{details})
+ and have pre-existing experimental methods and evaluation criteria.
+ Further, there are  baseline results we can use to commission  new 
+ {\bf instruments}.
+ 
+ As to data, computational science software  generates much
+on-line data.  For example,
+\fig{dealii} shows  data about
+millions of lines of code from
+the deal.II finite elements analysis
+library.
+%and the OpenMM molecular dynamics library.
+The core thing to note about
+\fig{dealii} is that the data
+for these plots comes from an open source tool called Github. 
+That is, there now exists ``in the open'' much data about computational science code.
+Our research has found over 200 such projects, some of which have very active Github
+profiles (see \tbl{samples}).
+
+\input{sample}
+\newpage
+% Much recent empirical SE research has focused on this data, and how
+% to leverage this kind of Github data to build software quality models~~\cite{commitguru, Kim08changes,catolino17_jitmobile,nayrolles18_clever,mockus00changeskeys,kamei12_jit,hindle08_largecommits}.
+
+%  To simplify the creation and maintenance of computational science software, we   propose  the  {\IT}\footnote{ Short for 
+% ``empirical \underline{SE} \underline{n}ow \underline{TRY}-ed on  computational science code''.} empirical software engineering workbench.
+% {\IT} contains a set of automatic agents that read code and comments and test
+% results from on-line repositories of computational science code.  {\IT} will advise:
+% \bi
+% \item[(a)] Where defects are hiding the code;
+% \item[(b)] How to prioritize test cases (so tests  likely to fail are executed sooner); 
+% \item[(c)] The appropriate number of programmers required
+% for each project; 
+% \item[(d)] Now to avoid spurious error messages (e.g. from static code analysis tools);
+% \item[(e)] Other issues, if time permits.
+% \ei
+% While many parts of {\IT} have been proposed in other domains,
+% results from a recent NSF EAGER grant, described below\footnote{CISE EAGER \#1826574.  Empirical Software Engineering for Computational Science. April 2018 to April 2019. PI= Tim Menzies.}, show that standard SE needs adaptation before it can succeed on computational
+% science software. This proposal would explore cost-effective methods for managing that adaption process. The resulting agents
+% will then be tested on all the   computational science projects currently available on the web (e.g. see the sample in  \tbl{samples}).
+%  This, in turn, will enable faster and better  software development  leading to   faster and greater progress in computational science.
+% \input{sample}
+
+
+
+ 
+% Standard methods in empirical software engineering (SE) needs to be adapted before it can be safely deployed in other
+% domains like computational science (see below, example in defect prediction). But what adaption methods are useful/useless? Are
+% they cost effective? Do they work effectively across multiple data sets? We have some preliminary results suggesting that the work
+% for (a) defect prediction but can we also adapt other tasks such as (b) test case prioritization, (c) effort estimation, (d) learning to
+% avoid spurious error message; (e) etc.
+
+
+
+
+
+\section{Frequently Asked Questions}\label{tion:faq}
+{\em Q1: Can SE defect predictors
+ find errors  in core science  (e.g. a wrong
+sign in Schr\"{o}dinger's  equation)?}
+
+No. Fixing such domain errors  must remains the
+task of skilled computational scientists. 
+That said, experience   shows~\cite{Holzmann:2017} that most   development time
+is spent on  low-level  tasks like
+(a)~manually reviewing code;
+(b)~running large test suites;
+(c)~deciding which bugs to fix and which to ignore;
+(d)~managing programming projects; 
+(e)~etc.
+Empirical SE can reduce the effort
+needed to complete   tasks (a)(b)(c)(d)(e), thus giving computational scientists
+more time to reflect on core domain issues.
+
+{\em Q2: Is this proposal
+only going to explore defect prediction, 
+as done in Figure~2?}
+
+ No. While we will explore (a)~defect prediction,
+we will
+also explore the tasks  listed above as (b)(c)(d)  as well as (e)~other tasks, as time and opportunity permits and as requested by   computational
+scientists. 
+
+{\em Q3. Is this proposal   too ambitious?
+Are there too many projects
+\tbl{samples} to study?}
+
+No. Much work in empirical SE targets the 
+automatic and scalable analysis of many projects.
+For example,
+PI Menzies' latest paper is an analysis of
+832 projects~\cite{krishna2018connection}\footnote{ Where the number of  next month's bug and enhancement
+requests are predicted
+using a sliding window of the last 4 months.}.
+Therefore, it is likely we will be able to handle 
+all of \tbl{samples}, and possibly even more.
+
+{\em Q4: It this proposal ambitious enough? Should it study 
+computational
+science  projects
+{\em not} in Github? }
+
+Perhaps. One reason to focus
+on the   \tbl{samples} projects is that, since they are all stored in Github, we need only one set of APIs to access all that data. 
+That said, 
+PI Menzies commits to following the lead of the 
+computational science community-- wherever they
+store their code, he will try to follow (caveat: providing that this other
+source has a usable API and it holds multiple projects).
+
+{\em Q5: What is the relevance of
+this work to the CSSI solicitation
+criteria?}
+\bi
+\item {\em Is the work 
+ SCIENCE-driven?}
+As shown  in Figure~2, there
+is much we need to understand on how
+to adapt empirical SE methods to the specifics
+of computational science. 
+\item
+{\em What is  INNOVATIVE
+about this approach?} Empirical SE methods have yet to be widely deployed in computational science. As seen above,
+deploying them requires  innovative extensions to standard SE methods  to make them suitable for
+computational science. The adaptation methods learned from the EAGER are an excellent example of combining both
+human+technical aspects of SE.
+\item
+{\em Is this work COLLABORATIVE?}
+This work will foster relationships between
+specialists in Empirical SE (e.g. PI Menzies) and computational scientists.
+Once we achieve automatic scalability,
+we can explore code from
+dozens to hundreds of computational
+science projects. 
+PI Menzies has already reached out to the CSSI community to obtain the above data and get feedback
+on his techniques\footnote{All
+the projects in \tbl{samples}
+were found with the assistance of
+the computational science community,
+including help from Prof. T. Daniel Crawford from MolSSI and
+Prof. Nancy Wilkins-Diehr from  
+the San Diego Science Gateways/XSEDE team.
+PI Menzies has presented results from his EAGER
+on a Sciences Gateways webinar
+February  13, 2019-- see youtu.be/WgoUFyQg4Js. See also the attached
+letters of collaboration from computational
+science researchers across
+the USA and Europe.}. In the proposed CSSI work, PI Menzies would reach out to any member of the CSSI community with an
+active on-line repository and explore adaption empirical SE methods for tasks (a)(b)(c)(d) to their codes. 
+Also, when there are clear lessons
+learned from this work,
+PI Menzies will
+presents tutorials at the PEARC conference,
+as well as webinars
+for XSEDE  
+and the Sciences Gateways series.
+\item
+{\em Does this proposal
+LEVERAGE existing work?:} 
+This work builds on existing, recognized capabilities
+in three ways.
+Firstly, it is based on an analysis
+of existing computational science code.
+Secondly, it 
+heavily leverages open source tools like Github.
+Thirdly, PI Menzies is one of the leading empirical SE researchers in the United States (ranked \#2 in the world in
+software analytics at Google Scholar). 
+Many of the methods
+that will be applied to the (a)(b)(c)(d)(e)
+tasks of this proposal   are currently being
+explored in his lab (but only on
+standard software). 
+\item
+{\em What is STRATEGIC about this proposal?} 
+This work will encourage measurement of progress and sharing of results.
+The SE agents built in this way can serve as a telescope giving everyone access
+to quality measures of 
+computational  science code. We anticipate that such attention will ``raise the bar'' on software quality concerns in the computational science community. 
+\item
+{\em How will this research infrastructure
+be SUSTAINED after this lifetime of this
+one grant?}  {\IT}  will be released as open source code (freely available, during and after this grant). 
+Once PI Menzies demonstrates the value of empirical SE to computational science, then dozens to hundreds more research faulty and
+graduate SE students could use and maintain and extend the contents
+of {\IT}. 
+\ei
+As evidence  in the last point, it is relevant to note that
+PI Menzies has a long and successful track record in encouraging large communities of researchers  to work on tasks that he has popularized.  By showing that innovative results could be obtained and published from certain sources, PI Menzies 
+has lead 100s of researchers to work first on NASA~\cite{me07b} data and then data from open source JAVA code~\cite{fu2016tuning}. For example, according to Google Scholar in January 2018, nine of the top 50-most-cited papers at the  IEEE Transactions of Software Engineering used data and/or tools first popularized in the literature by PI Menzies (and similar patterns can be seen in other journals).
+
+
+\section{ Technical Details}\label{tion:details}
+
+
+
+The rest of this proposal offers details  on the 
+\underline{S}trategies, \underline{En}deavors, 
+\underline{T}uners,
+inst\underline{R}uments and \underline{Y}ields
+that will implemented and explored as part
+of the {\IT} workbench. 
+
+\subsection{Target Endeavors}\label{tion:ende}
+
+Recall that {\IT} is intended to reduce the
+time required to handle  many  tedious,
+aspects of software development, thereby  freeing up the time of computational scientists to think
+more about core scientific issues. This proposaal will explore
+several  such tasks:
+\bi
+\item[(a)] 
+{\em Manually reviewing code} which we will optimize with defect predictors that tell developers where to look first to find most bugs (see \tion{dp}).
+\item[(b)] {\em Running large test suites}
+which we will optimize with test case prioritization
+strategies that {\em first} run the tests
+most likely to fail  sooner (thus allowing developers to stop long test run, sooner, once they acquire   enough issues to fix)
+(see \tion{test}).
+\item[(c)]  {\em Deciding what issues to act on  and which to 
+ignore} which we will optimize with 
+active learning tools that learn which are the important warnings that must be fixed
+(see \tion{falsealarm}).
+\item [(d)] {\em Managing programming projects}
+which we will optimizer with technical debt detectors
+that can advise when there are too many, or not enough, programmers working on software
+(see \tion{effort}).
+\item[(e)] And other tasks, as time and opportunity permits and as requested by   computational
+scientists.
+\ei
+These tasks were selected since, as discussed below, there is much research research on all the above in the empirical SE literature. Hence they serve to check if the concerns of standard
+empirical SE can serve the computational science community.
+ 
+ \subsection{Practicality}\label{tion:practical}
+
+\begin{wrapfigure}{r}{3in}
+\vspace{-5mm}
+\begin{center}
+{\small
+\begin{tabular}{c|c|ccc} 
+ \multicolumn{1}{c}{{\bf Endeavor }}&Section &{\em dm }& {\em ho}& {\em al  } \\\hline 
+defect prediction   &\tion{dp}    &     \checkmark         &          \checkmark               &       \checkmark                  \\  
+test case prioritization& \tion{test} &    \checkmark          &     \checkmark                 &     \checkmark                   \\
+handling warnings     & \tion{falsealarm} &    \checkmark          &                       &        \checkmark                  \\
+technical debt        & \tion{effort}  &     \checkmark          &    \checkmark                   &   \checkmark                        \\
+
+\end{tabular}}
+\end{center}
+\caption{{\bf Strategies} for {\bf tuning} the {\bf instruments} of different {\bf endeavors}.
+Column titles {\em dm, ho, al} are explained later in this proposal. }
+\label{tbl:reuse}
+\vspace{-20mm}
+\end{wrapfigure}
+It is prudent to consider the practicality of exploring
+all of the (a)(b)(c)(d)(e) endeavors from \tion{ende}. Is this list too long for
+one NSF project? We think not and   \tbl{reuse} explains why.
+
+This table shows   some of the software tools
+to used in this work. 
+The column names describe different {\bf strategies} that are explained later in this proposal:
+\bi
+\item {\em dm} = data miners; 
+\item {\em ho} = hyperparameter optimization;
+\item {\em al} = active learning.
+\ei
+Our experience is that,
+when used together, this triad of {\bf strategies}
+offers a general framework for commissioning
+empirical SE to new domains. In support  of
+the last sentence,  we note that:
+\bi
+\item When there is too much data to look at,
+{\em data miners} can automatically find important patterns.
+\item When there are too many options about how
+to configure a data miner, 
+{\em hyperparameter optimizers} can automatically find the best settings.
+\item 
+When it is too expensive to check all the results
+from data mining and hyperparameter optimization,
+{\em active learners} can prune away the uninformative examples, leaving behind  a manageably
+small number of examples to check.
+\ei
+More importantly, this triad
+of {\bf strategies} can be reused
+in multiple {\bf endeavors} (as seen in \tbl{reuse}).  That is, 
+once one endeavor is completed, we will have much of the infrastructure needed for the next endeavor.
+Hence we are confident that  this grant,
+we can explore the {\bf endeavors}  (a)(b)(c)(d)(e) 
+listed in  \tion{ende}.
+
+
+
+\subsection{About Four Different Endeavors}\label{tion:four}
+This proposal will explore  four
+{\bf endeavors} (described in this section)
+in order to 
+to collect the data needed to test the  Claims 1,2,3,4,5 made in the introduction. 
+
+
+Anyone  interested in the ``how'', rather than the ``what'', of this project
+might care to skip to the Management Plan on page \pageref{tion:plan}. That section 
+ describes how  data
+will be collected  and used
+to test Claims 1,2,3,4,5.  The key thing to note
+there is that many of those
+tests will need to know how to measure
+the {\bf yield} of different {\bf endeavors}:
+\bi
+\item As discussed in \tion{dp}, the {\bf yields} for {\em defect prediction} are many and varied and include measures such as \eq{ostrand} (where  {\em larger} values are {\em better}).
+\item 
+As discussed in \tion{test},
+the {\bf yield} for
+{\em test case prioritization}
+is the  time taken to find X\% of the failing tests, expressed as a ratio of the time required by a ``perfect'' oracle (so {\em larger} values are {\em better}).
+\item 
+As discussed in \tion{falsealarm},
+the {\bf yield} for {\em learning to avoid
+spurious warnings} is how few warnings have to be inspected before a classifier can be learned to 
+assess the remaining warnings (so here, {\em faster} learning time is {\em better}).
+\item As discussed in \tion{effort},  two {\bf yields} for
+{\em technical debt 
+management} are (a) how quickly
+can we learn to recognize programmer comments
+indicate technical debt (so {\em faster} values are {\em better}); and (b)
+ how well can we recognize when the
+projects are encouraging technical debt
+via  a suspiciously low number of developers
+(so {\em smaller} errors in estimating the required number of developers  are {\em better}).
+\ei
+
+
+
+
+
+
+
+\subsubsection{Endeavoring to   Predict Defects}\label{tion:dp}
+
+% As soon as people started programming, it became apparent
+% that programming was an inherently buggy process. As recalled
+% by Maurice Wilkes~\cite{wilkes1985memoirs}, speaking of his programming experiences from the early 1950s: ``It was on one of my journeys between the EDSAC room and the punching equipment that `hesitating at the angles of stairs' the realization came over me with full force that a good part of the remainder of my life was going to be spent in finding errors in my own programs.''
+This section describes the defect prediction task explored in Figure~2.
+As mentioned in the introduction, the Figure~2 results are somewhat limited (less than a dozen projects) so for this new proposal we would test the generality
+of the Figure~2 results (by exploring data from many more projects).
+ 
+ Research shows
+that software bugs are not distributed evenly across
+a system. Rather, they seem to clump in small corners of the code. For example,
+Hamill et al.~\cite{hamill09} report studies with the GNU C++ compiler
+where half of the files were never implicated in issue reports while 10\% of
+the files were mentioned in half of the issues. Also,
+Ostrand et al.~\cite{Ostrand:2004} studied
+AT\&T data and reported that 80\% of the bugs reside in 20\% of the files.
+Further, a similar ``80-20'' patterns have been seen in NASA systems~\cite{hamill09};
+open-source software~\cite{koru2009investigation}; and software
+from Turkey~\cite{misirli2011ai}. 
+
+Given this skewed distribution,  a
+cost-effective   quality assurance approach is required to  sample
+across a   system, then focus  on regions reporting some
+bugs.
+Software defect predictors built from data miners are 
+ one way to implement such a sampling policy.   Their conclusions
+are never 100\% correct, but they can  suggest where to focus more expensive  methods such as elaborate manual
+review of source code~\cite{Shull:2001}; symbolic execution checking~\cite{paaareanu2008combining}, etc.
+ Misirli et al.~\cite{misirli2011ai} found that  the guidance offered by
+defect predictors
+significantly reduced  
+software inspection effort (by 72\%) in  Turkish software companies 
+while still     letting them to localize
+their faults (find the  25\% of the files that
+have 88\% of the defects).
+
+% Not only do static code defect predictors perform well compared to manual methods,
+% they also are competitive with certain automatic methods.
+% A recent study at ICSE'14, Rahman et al.~\cite{rahman2014comparing} compared
+% (a) static code analysis tools FindBugs, Jlint, and Pmd and (b)
+% static code defect predictors
+% (which they called ``statistical defect prediction'') built using logistic regression.
+% They found  no significant differences in the cost-effectiveness
+% of these  approaches. Given this equivalence, it is significant to note that 
+% static code defect prediction can be quickly adapted to new languages by building lightweight
+% parsers that extract static code metrics. The same is not true for   static code analyzers-- these need  extensive modification before they can be used on new
+% languages.
+
+{\IT} will implement code to assess
+defect prediction  {\bf yield} in multiple ways
+since,
+in our experience,
+it is best  evaluate defect predictors on multiple {\bf yield}s.
+(Why? Because it is possible to succeed according
+to one   {\bf yield}   (e.g., recall)
+while failing on another (e.g. false alarm)~\cite{fu2016tuning}). Also,
+we deprecate the use of  precision and accuracy since these can be misleading for imbalanced data sets where the target class is somewhat
+rare ~\cite{Menzies:2007prec}. 
+In other research, Ostrand proposes maximizing the ratio:
+\begin{equation}\label{eq:ostrand}P\;/\;L\end{equation}
+where $P$ is the percent of bugs found after reading  $L$ lines~\cite{Ostrand:2004}. In this
+expression, maximum
+{\bf yield} come from finding the most bugs after reading the fewest lines of code. 
+For lists of different ways to measure {\bf yield}, see table 23.2 of~\cite{menzies2014sharing} and Section~5 of~\cite{lo17_ifa}. All these will be implemented in {\IT}.
+
+{\IT} will include
+ many {\bf instruments} for  defect prediction.
+ For example, we will include all the machine learning algorithms
+studied by Ghotra'15~\cite{Ghotra15}.
+We will also include the data pre-processing methods endorse
+by Agrawal etl'18~\cite{agrawal2017better},
+which includes methods for class frequency re-balancing.
+Further, 
+we will integrate with  Commit.Guru~\cite{commitguru},
+thus enabling  
+web-scale data collection. Lastly,
+we will use  the SZZ algorithm to find
+what code lead to bug reports~\cite{costa17szz, Kim08changes, Sliwerski05changes,RODRIGUEZPEREZ2018164}.
+
+Figure~2 reported our experience applying   standard SE {\bf instruments}
+to computational science.
+The lesson learned from that work was
+that, before {\IT} could work for
+computational science, we had to {\bf tune} those methods. 
+There are many ways to {\bf tune} defect predictors:
+\bi
+\item Adjust creation of  {\em dependent variables} to  better handled (e.g.) 
+class labelling ~\cite{commitguru} or class imbalance~\cite{agrawal2017better};
+or (e.g.) generate better initial labels (as done in Figure~2).
+\item Adjust creation of    {\em independent variables} via better 
+descritization~\cite{fayyad1993multi,Dougherty:1995} or feature selection~\cite{menzies07w,hall2003benchmarking};
+\item Adjust the control settings of the learner which,
+in turn, adjusts how the {\em independent} variables are combined together to predict
+for the {\em dependent variables}~\cite{%
+Agrawal19,%
+fu2016tuning,%
+nair2017flash,%
+agrawal2017better}.
+\item
+After building defect predictors, it is possible
+to reflect on the learned models to infer {\em guidelines }for how to decrease defects in future projects~\cite{xtree17}.
+We make no causal claim there (e.g. that changing XYZ will definitely  reduce defects). Rather, these guidelines are more probabilistic statements that (e.g.)  the historical record 
+shows  that Java methods with less than X lines  of code have least defects.
+\ei
+The above list shows {\em what}   can be tuned. The following list of {\bf strategies} shows {\em how} we might tune them:
+ \bi
+
+\item {\em Active learners} can help orchestrate a human+AI partnership~\cite{Cormack2017Navigating,Cormack2016Engineering,cormack2016scalability,Cormack2015Autonomy,cormack2014evaluation,grossman2013,wallace2010semi,wallace2010active,wallace2011should,wallace2012class,wallace2013active,Yu:2018,Yu2019}.
+In this approach, humans watch over the conclusions made by an AI, sometimes
+adjusting   faulty conclusions. AI then uses the conclusions to date to
+select the next most informative example to show to humans.
+For example, in Figure~2, our active learner was  an incremental SVM that reflected
+on the support vectors to select the next commit message
+to label ``buggy'' or ``not buggy''.
+That active learning  
+(a)~greatly reducing
+the effort required by humans to review the conclusions of the AI
+while (b)~also greatly increasing
+the {\bf yield}  of the defect predictor (see the  \textcolor{ForestGreen}{\bf GREEN} triangles
+of  Figure~2).
+\item {\em Hyperparameter optimziation}  
+ is the process of automatically searching the space of possible learners and their possible control settings. Such optimizers select learners/settings
+in order to improve the {\bf yields} that are relevant to a particular project. Without such optimizers, it is something of a black-art to select the best learners/control settings. With those optimizers, it is possible to dramatically improve learner performance~\cite{agrawal2017better,fu2016tuning,tanti16defect,majumder2018}. State of the art hyperparameter optimizers include SMAC~\cite{Hutter:2011} and Hyperband~\cite{Li:2017}
+and the FLASH algorithm~\cite{nair2017flash}  by Nair and
+PI Menzies.
+% \item  {\em Goal-aware data miners} 
+% like WHICH~\cite{menzies2010defect} or FFTs~\cite{chen2018applications} or GA-based rule learners~\cite{Fernandez10,bacardit2013large,GARCIAPIQUER201769}   
+% adjust the specifics of their internal
+% search in order to match the users' desired {\bf yields}. For example, a standard learner would try to 
+% accurately report potential defects.  But for developers with limited time, a better way to measure the {\bf yields} in terms of \eq{ostrand}.
+\ei
+It is an open empirical issue
+which of these work best for  computational science
+(hence, this proposal).
+% That said, preliminary
+% results are promising:
+% \bi
+% \item
+% As reported above,
+% the final analysis of Figure~2 took just a few weeks (once we had debugged our scripts)
+% and was achieved with \$0 open source tools using standard desktop machines. 
+% \item
+% Active learning is  surprisingly general and can be applied to  many endeavors.
+% We have preliminary results showing one active learner 
+% (the one used for
+% defect prediction in Figure~2) also works for endeavors such as 
+% detecting software security vulnerabilities~\cite{Yu20},
+% test case prioritization~\cite{zhu19b}, technical debt management~\cite{xia19},   and
+% learning to avoid spurious warning messages~\cite{yang19b}.
+% \item
+% Hyperparameter optimization   can automate     an exploration of a large space
+% of options.  
+%  PI Menzies has    shown that  by exploiting 
+%  data symmetries found in    data from software 
+% projects, hyperparameter optimization can speed up
+% by several orders of magnitude~\cite{%
+% Agrawal19,%
+% fu2016tuning,% 
+% nair2017flash,%
+% agrawal2017better,chen2017beyond,nair2016accidental,agrawal2016wrong}.
+
+% % \item
+% % To be sure, some goal-aware learning methods may be  complex and require hardware support in order
+% % terminate in a reasonable time (e.g. large cloud-based CPU farms~\cite{bacardit2013large}. However, PI Menzies has found that for SE data,
+% % if the discretization policy is informed by the desired {\bf yields}, then very simple rule learners can 
+% % perform very well~\cite{menzies2010defect,chen2018applications}. For example, a standard discretization
+% % method is to  divide numeric ranges to decrease class variance~\cite{Breiman1996}. But for SE
+% % data, effective goal-aware learning can be achieved by discretizing numerics to maximize \eq{ostrand}.
+% \ei
+% That said, just to 
+% say the obvious, we need to test
+% if it is just as  practical 
+% to apply empirical SE to computational science
+%  using more projects
+% and more endeavors (hence, this proposal).
+
+
+
+\subsubsection{Endeavoring to Prioritize Test  Cases}\label{tion:test}
+Defect prediction methods help members of one software team review their code.
+Hence, it supports a {\em micro task} that occurs often deep within a software development project.
+
+Test case prioritization, on the other hand,  is a {\em macro task} that struggles to tame the complexity of large scale testing.
+ Test suite execution
+is the rate determining step in software development (since faster
+tests means faster delivery of  software to users).
+
+
+ 
+Testing takes much of the time of modern software development. There are many reasons for this.
+Firstly,
+re-running all the tests is  important when communities work together on a single code
+base. In that case, the polite (or cautious)  developer re-runs all the tests {\em before} she commits her code to the shared repository, just to ensure that their
+changes will not introduce errors into the work of other people.
+Secondly,  
+experienced developers know how to write just enough code (and no more) to meet some requirement.
+In
+TDD~\cite{beck2003test} or ``test-driven development'',
+ \textcolor{red}{\em red} tests (which always fail)
+are written first. 
+Next, developers write just enough code to make the tests turn  \textcolor{ForestGreen}{\em green} (i.e. pass). Also, sometimes,
+developers  might refactor (i.e. reorganize) the code using  experience gained
+from running the system. This cycle of \textcolor{red}{red}-\textcolor{ForestGreen}{green}-refactor is a widely-adopted practice
+of agile programming. 
+Thirdly, 
+ TDD is  useful when prototoyping software
+since it ensures that a test suite is built alongside the code base.
+When prototyping,  the wise developer incrementally makes
+small changes to the code then re-runs all the tests, just to ensure that their most recent changes are not damaging the code base. Observe that when prototyping with TDD, developers are 
+constantly re-running their tests.
+
+
+Elbaum et al~\cite{google} recently showed how to faster find failing tests. That work explored the Google test case prioritization problem. Google developers were advocates of TDD and so, as part of their
+code, there were many tests.
+Hence, between January and October 2013, Google ran three billion unit tests. In that suite,
+it was taking days before any failing tests were found. Elbaum et al.
+found that by  weighing tests by 
+how long since they last failed;
+how new were the tests;
+and how long since they were last executed;
+then  many of their tests started failing much faster (sometimes, even within an hour). 
+
+\newpage
+\input{tests}
+
+
+
+The Elbaum et al. results prompted much subsequent research~\cite{google,cost-based,38,97,182,59,183,103,132,158,Yu:2018}.
+ \tbl{algorithms} shows some of the 
+{\bf strategies} to {\bf tune} the {\bf endeavor} of test case prioritization.
+\bi
+\item
+Group A are baselines methods.
+The randomized ordering called A1 is the lower bound of any effective prioritization algorithm while the  A2 is the upper bound. In the case of A2, we sort the failing
+tests in ascending order of runtime.
+The {\bf yield}  of  other methods are expressed as percent of tests
+that will fail in the time it takes A2 to run all failing tests (so {\em larger} 
+{\bf yields} are {\em better}).
+\item The Group 
+  B methods  reflect on   failure history, plus
+   the  cost (runtime) requires to run the test. 
+  \item
+  Group C are supervised learning-based algorithms that use data from past tests to learn a model that predicts what future tests will fail first.
+  \item Group D are feedback-based algorithms that start with some initial weights for each test, then adjust those weights after each test fails or succeeds. 
+  \item   Group E shows  our own methods that use 
+  the   active learner from Figure~2. Here, we  (a)~learn
+  an SVM classifier from test features; then   
+  (b)~ask it 
+  to predict which  test is most likely to fail first; then (c)~use feedback from
+  that test to  update the  classifier; then (d) loop back to (b).
+  \ei
+  {\IT}  contains all the {\bf strategies} of \tbl{algorithms}. But which
+  are most effective for computational science projects? We just do not know.
+  \fig{relative} shows results were we applied all the strategies to data from one client (not from computational science). Here, we found that adapting the active learning methods of Figure~2 performed best (see the E2 results of   \fig{relative})-- which for this proposal is very good news since it means that might be general and reusable {\bf strategies}
+  for adapting  empirical SE  methods to new domains. 
+  
+ 
+The 
+  lesson of Figure~2 is that off-the-shelf versions of standard empirical methods (e.g. \tbl{algorithms}) may not be applicable to computational science. 
+ That is, clearly, this research must do two things:
+  \bi
+  \item {\em Test the {\bf strategies} of \tbl{algorithms}} on   computational science  projects.
+Preliminary results suggesting   this is possible.
+  Many    projects   in \tbl{samples}
+  have a ``travis.yml'' file in the root of their repositories\footnote{
+ACEMD,
+AMBER,
+APBS,
+BLIS,
+cctools,
+clowder,
+cyclus,
+dealii,
+forcebalance,
+foyer,
+freud,
+GooFit,
+HOOMD-blue,
+hubzero,
+hydroshare,
+irods,
+Luigi ,
+MADNESS,
+mdanalysis,
+mdtraj,
+metpy,
+MOLCAS,
+NDS Lab Workbench,
+NWChem,
+openforcefield,
+OpenMM,
+openmmtools,
+OpenMPI,
+OpenMX,
+parsl,
+PCMSolver,
+PLUMED,
+Psi4,
+pymatgen,
+pyscf,
+quantum\_package,
+RMG-Py,
+SCIRun,
+signac-flow,
+trellis,
+tripal,
+Use Galaxy,
+xenon,
+yank,
+yt}.
+This means that these projects use a continuous integration tool called Travis CI to perform their testing;
+i.e. test results from these   projects are available in a consistent format at the Travis web site. Therefore this proposal
+can try to  apply at  some of the \tbl{algorithms} {\bf strategies} to computational science.
+\item
+{\em If necessary, {\bf tune} the {\bf strategies} of \tbl{algorithms}} to computational science projects.
+The lesson of Figure~2 was that computational science projects are different to
+standard SE projects. It is hence an open research question whether or not
+we must {\bf tune} the   {\bf strategies} of \tbl{algorithms} for computational science.
+ \ei 
+ 
+ 
+\begin{figure}[!t]
+
+\fbox{
+\begin{minipage}{2.9in}
+{\scriptsize \begin{tabular}{l@{~~~}l@{~~~}r@{~~~}r@{~~~}c}
+%\arrayrulecolor{lightgray}
+\textbf{Rank} & \textbf{Treatment} & \textbf{Median} & \textbf{IQR} & \\%\hline
+  1 &           D2 &    0.5  &  0.1 & \quart{0}{19}{5}{105} \\
+  1 &           A1 &    0.55  &  0.02 & \quart{13}{4}{15}{105} \\
+  1 &           D1 &    0.55  &  0.04 & \quart{11}{8}{15}{105} \\
+  1 &           B1 &    0.55  &  0.03 & \quart{13}{6}{15}{105} \\
+  \rowcolor{blue!10} 2 &           D4 &    0.6  &  0.11 & \quart{15}{22}{25}{105} \\
+    3 &           E1 &    0.69  &  0.1 & \quart{39}{20}{43}{105} \\
+  3 &           C2 &    0.73  &  0.07 & \quart{43}{14}{51}{105} \\
+  3 &           C3 &    0.74  &  0.09 & \quart{43}{18}{53}{105} \\
+  3 &           C1 &    0.73  &  0.11 & \quart{43}{22}{51}{105} \\
+  \rowcolor{blue!10}  4 &           B4 &    0.76  &  0.06 & \quart{53}{12}{57}{105} \\
+ 5 &           B3 &    0.77  &  0.14 & \quart{43}{28}{59}{105} \\
+  5 &           B2 &    0.77  &  0.15 & \quart{41}{30}{59}{105} \\
+  5 &           B6 &    0.79  &  0.08 & \quart{53}{16}{63}{105} \\
+  5 &           B5 &    0.81  &  0.12 & \quart{49}{24}{67}{105} \\
+  \rowcolor{blue!10} 6 &         E2 &    0.84  &  0.08 & \quart{63}{16}{73}{105} \\
+ \end{tabular}}
+\end{minipage}\begin{minipage}{3.5in}
+{\small 
+\bi
+\item The left-hand-side {\em Rank} column groups the 
+results into those that are not statistically  different (as judged by a  95\% significance test and an effect size test). 
+\item
+The {\em Treatment} column lists the treatment name using the nomenclature of \tbl{algorithms}.
+\item
+ {\em Median} and {\em IQR} columns show the 50th percentiles and the 75th-25th percentile {\bf yields}  seen in 20 repeats of these studies. Here,
+$0 \le \mathit{{\bf yield}} \le 1$ and {\em higher} {\bf yeilds}.
+are {\em better}.
+\item
+The right-hand-side horizontal lines+spheres are a visual
+presentation of the  IQR and median (respectively).
+\ei
+}
+\end{minipage}
+}
+\caption{Test prioritization simulations on 40 successive test runs,
+ report {\bf yields} seen in  different prioritization {\bf strategies}. 
+ Important note: these results do {\bf NOT} come from computational science.}
+\label{fig:relative} 
+\end{figure}
+
+
+% \begin{wrapfigure}{r}{1.4in}
+% \includegraphics[width=1.4in]{fig/growth.pdf}
+% \caption{Characteristic growth curves of \#failed
+% tests vs \#test executions (with active learning).}\label{fig:growth}
+% \end{wrapfigure} If we can improve test case prioritization, then this
+% would have three specific and very useful advantages.
+% Firstly,  {\em faster testing}.
+% If we can improve test case prioritization with the our active learning methods (the E2 method of \tbl{algorithms} and \fig{relative}), then     we can 
+% stop   testing sooner, and also
+% know how many bugs are left to find.
+% The  test growth curves have a characteristic shape (see \fig{growth}).
+% By fitting a parametric  equation to these curves, we can extrapolate forward to infer
+% how many more failures will ever be found by the current tests. Using that knowledge,
+% developers can then make informed decisions about the cost-effectiveness of futher testing. For example, in \fig{relative}, the E2 method performed so well
+% since it terminated when its curve extrapolations reported that it had found 95\% of all failing tests.
+
+
+
+% Secondly,  {\em more versions of the software,
+% written faster}.
+% Consider the case where a full test suite takes hours (or days) to run
+% but, using our {\bf strategies}, we can find failing tests in just a few
+% minutes to hours. 
+% In that case, the testing can be halted early so the   developers build  a 
+% new (and fixed)   version.
+
+% Thirdly, {\em cheaper  testing that steals fewer resources from other tasks}.
+% Consider the case where a full test suite takes days  (or weeks) to run.
+% Such long test runs typically use some commercial 
+% cloud or government funded supercomputer resource.
+% If we can stop tests early, then developers can spend less money on cloud
+% compute facilities. Also, those developers might also be  able to move their tests off
+% the supercomputer, thus freeing up that resource for core research.
+ 
+
+\subsubsection{Endeavoring to Avoid Spurious Warnings}\label{tion:falsealarm}
+
+
+There exists a bewildering number of   ``rules of thumb'' 
+that warning developers about potential problems with software.
+For example,
+Riel~\cite{riel1996object} lists 61  rules such as ``beware of many accessors''~\footnote{Beware  classes that have many accesser  methods defined in their public interface, many of them imply that related data and behavior are not being kept in one place.}. 
+Also, 
+Fowler et al.~\cite{fowler99}
+offers  a list of ``code smells'' such as ``beware shotgun surgery''\footnote{Making any modifications requires that you make many small changes to many different classes.}. 
+Many of these warning rules
+have been coded up into automatic agents that can review  a very large code base.
+For example, the FindBugs   tool~\cite{Ayewah08} warns  developers to over 400 potential problems such as ``Empty finalizer should be deleted'' and `` Class defines equals() but not hashCode()''.
+
+ The problem with these  tools is  {\em excessive
+spurious warnings} that require much time to read, assess, then change the associated
+code.
+This is a major problem.
+Johnson et al. \cite{johnson2013don} investigated why developers are not widely using static analysis tools. They conducted reviews with 20 developers
+and found that false positives, and the way in which the warnings
+are presented are the main barriers. 
+Worse still,   not all relevant warnings are worth fixing.
+PI Menzies, with his graduate student Rahul Krishna have shown that the majority
+  changes proposed by (e.g.) Fowler's bad smell list have zero
+  impact on code quality~\cite{KrishnaML16}.
+
+
+
+  
+  
+  Avoiding spurious warnings is a major problem that has been
+  studied by
+  many researchers~\cite{hanam2014finding, heckman2008establishing, heckman2009model, kim2007prioritizing, kim2007warnings, kremenek2004correlation,liang2010automatic, ruthruff2008predicting,shen2011efindbugs,
+yuksel2013automated}. For example 
+Heckman and Williams~\cite{heckman2009model}
+conducted a systematic literature
+review of actionable warning identification techniques. They identified 21 studies and analyzed the identification approaches, the
+evaluation methodology, subject projects, etc. Allier et al.~\cite{allier2012framework} proposed a framework to compare six error ranking algorithms and
+identified the best algorithms to rank warnings. 
+Avgustinov et al. \cite{avgustinov2015tracking} presented
+an approach to track static analysis warnings over the history of
+a project, and further use the information to capture developer's
+characteristics.  
+%Thung et al. \cite{thung2015extent} studied to what extent could field defects
+%be detected by the state-of-the-art static analysis tools.
+
+ The above research is commendable in many respects. But, repeating the main theme of this proposal, it is an open question if these methods
+from standard empirical SE applies to computational science software.  The methods in the above paragraph were mostly manual studies requiring
+a daunting amount of effort to repeat across (e.g.) the sample systems of \tbl{samples}.
+
+
+
+
+
+ Happily, there is a better, faster, way to tune warning messages
+to computational science software. Using the active learner of Figure~2, it is possible for developers  to review just a few  warning messages (marking them ``relevant'' and ''ingore'').
+PI Menzies and his graduate student
+Xueqi Yang tested this approach (but not on computational
+science code). As seen in \fig{warn}, after reading
+ 10\% of the warnings, a developer has found 80\% of the warnings they would take act on. Better yet, 
+this active learner generates
+a classifier that could  automatically review the rest
+of the warnings, deleting the irrelevant ones.
+
+
+The case study of \fig{warn} comes from an open source JAVA system;
+i.e. {\em not} computational science software. It remains to be seen if this approach is effective for computational science. 
+Hence, we propose,
+adding   our warning active learning {\bf strategies}
+to {\IT}; then
+applying them  to warning messages  generated  from \tbl{samples}, and 
+{\bf tuning}  as necessary.
+
+
+\begin{figure}  
+\fbox{%
+\begin{minipage}{2.7in}
+\includegraphics[height=2.2in]{fig/test4.PNG}
+\end{minipage}~\begin{minipage}{3.7in}
+{
+\bi
+\item
+X-axis shows all warnings.
+\item
+Y-axis {\bf yield}
+ shows percent of ``relevant'' warnings
+ discovered so far  (where ``relevant'' means ``a developer will take action on this warning'').  \item
+ Top line
+ shows  our preferred active learning {\bf strategy}.
+ Note that this is the same active learner as used in ~~~ Figure~2.
+ \item
+ Other lines shows results from other, inferior,  warning prioritization
+  {\bf strategies}.from  the literature. 
+ \ei}
+ \end{minipage}}
+ \caption{ Active learning results for learning a classifier for relevant warning messages.} \label{fig:warn}
+ \end{figure} 
+%for computational science, their results need to be checke for comtpuational science projects.
+% Fristly, most of the above are most manual methods that take much effort to complete. H
+
+% Then, we applied our approach to the 446 projects
+% seen in six open source effort datasets collected and developed by Qi et al.~\cite{QiEffort17} from Github. In Qi et al.'s work, they implemented a platform for GitHub data crawling and filtering, and extracting necessary information for effort estimation tasks. They also propose a specific algorithm to make the collected dataset have dynamic expansion capability~\cite{QiEffort17}. Using the data sets from Qi et al., we can validate our approach's effectiveness in recent software effort estimating tasks. For the details about these newly collected datasets, see Table~\ref{table:dataset}.
+
+
+
+\begin{figure}[!b]
+\begin{center}
+\includegraphics[width=6in]{fig/debt.png}
+\end{center}
+\vspace{-7mm}
+\caption{Impact of technical debt on software. From~\cite{Ozkaya12}.}\label{fig:debt}
+\vspace{-2mm}
+\end{figure}
+
+
+\subsubsection{Endeavoring to Avoid Technical Debt}\label{tion:effort}
+When developers cut corners and make haste to rush out code, then that code
+often contains {\em technical debt}; i.e. decisions that must be repaid, later on, with further work.
+Technical debt is seen in (e.g.) bad architectural decisions
+such as not
+separating the computational core of the code from the interface components. 
+
+
+Technical debt is like dirt in the gears of software production.
+As it accumulates,   development becomes harder and slower. To continue the above example,  if the core and the interface are not properly separated, then it can be hard to port the code to new platform (e.g. to make it a web-service).  
+\fig{debt} lists other other areas  adversely effected by technical debt including {\em evolvability} (how fast we can add new functionality) and {\em maintainability} (how well we can keep bugs out of the code). {\IT} aims to tackle thi problem in two aspects---identifying existing technical debt and avoiding future    technical debt.
+
+
+\textbf{Identifying Existing Technical Debt:} Technical debt is often self-admitted by the developer in code comments\cite{potdar2014exploratory}. This is called Self-Admitted Technical Debt (SATD), where the developer mentions about the debt that he or she is leaving behind for future reference in the source code comments 
+``{\em hack, fixme, is problematic, this isn't very solid, probably a bug, hope everything will work, fix this crap}''. Therefore the SATD can be identified by asking a human to read through the source code comments. Since this is a tedious, time consuming and error-prone process, SE researchers have tried various ways to find SATDs faster, with less effort~\cite{maldonado2015detecting,maldonado2017using,huang2018identifying}. As shown in Figure~\ref{tab:SATD}, these studies suggest that supervised learning models trained on SATD comments from other software project can be applied to predict for SATD comments in a new software project, thus saving human efforts for reading the comments.
+
+
+\begin{wrapfigure}{r}{3in}
+\small
+\begin{center}
+\begin{tabular}{l|ccc}
+Software Project & Precision & Recall & F1-score \\\hline
+ArgoUML          & 0.80     & 0.85  & 0.83    \\
+Columba          & 0.77      & 0.84  & 0.80    \\
+Hibernate        & 0.83     & 0.75  & 0.79    \\
+jEdit            & 0.70     & 0.41   & 0.52    \\
+JFreeChart       & 0.61     & 0.79  & 0.69    \\
+Jmeter           & 0.80     & 0.77  & 0.78    \\
+JRuby            & 0.83     & 0.86  & 0.84    \\
+Squirrel         & 0.708     & 0.602  & 0.651    \\
+\rowcolor{blue!10}Average          & 0.756     & 0.733  & 0.737    
+\end{tabular}
+\end{center}
+\caption{Classifying Self-Admitted Technical Debt with Supervised Learning~\cite{huang2018identifying}}
+\label{tab:SATD}\label{tbl:SATD}
+\vspace{-5mm}
+\end{wrapfigure}
+
+\textbf{Avoiding Future Technical Debt:} Another way to mitigate   technical
+debt is to remove the conditions under which it first appears.
+Many authors agree that the major cause of technical debt is {\em schedule pressure}~\cite{Ozkaya12}.
+So,  to test if  software  is threatened by technical debt,
+we must ask  ``did/are enough developers working on the code?''.
+New results~\cite{Robles:2014,QiEffort17,xia19} show that we can now check
+ if there are 
+suspiciously too few (or too many) developers
+working on a project.
+  One interesting feature of this new approach is that it bases its estimates on code attributes drawn from Github repositories. That is, this
+  preemptive methods for avoiding
+  technical debt might be applicable to computational science software such as those systems listed in \tbl{samples}.
+
+
+\begin{figure}[!b]
+\fbox{%
+\begin{minipage}{2.8in}
+\includegraphics[width=3in]{fig/header.png}
+\includegraphics[width=3in]{fig/effort.png}
+\end{minipage}~~~\begin{minipage}{3.5in}
+{\small
+\bi
+\item
+The  left-hand {\em Rank}
+column  groups     results  whose {\bf yields}   are  not  statistically  different  (as  judged  by  a 95\% significance test and an effect size test).
+\item
+ {\em Method} lists the   {\bf instruments} used for prediction: the CART regression tree learner,  linear optimization using LP4EE;  a random forest (RF) of regression trees);
+an analogy-based  method
+called ABE), and the   SVR support vector regression method that  uses kernel functions to project
+ data to a new hyperspace where  non-linear patterns
+are represented in a simpler manner.
+\item
+The suffix ``\_DE'' or \mbox{``\_FLASH''} denotes an {\bf instrument} {\bf tuned} by a hyperparameter optimizer.
+\ei}
+\end{minipage}
+}
+
+ \caption{ {\bf Instruments} for effort estimation applied to three Github-based JAVA projects.
+ Here, the {\bf Yield} is measured in \mbox{{\em (actual - predicted)/actual}} (so {\em smaller} values are {\em better}.} \label{fig:effort}
+ \end{figure} 
+ For this preemptive method to work, we need to be able to know 
+ what are the expected number of developers required
+ for a project.
+ Recent work, including research by PI Menzies and his graduate student
+Tianpei Xia, shows how that expectation can be inferred~\cite{Robles:2014,QiEffort17,xia19}.
+ \fig{effort} shows 20 repeated estimation experiments in learning
+ the expected number of developers.   That figure shows the error between
+ the estimated and actual numbers of developers.
+For this proposal, there are several important features of   \fig{effort}:
+\bi
+\item
+In multiple data sets, our best  {\bf instruments} have error
+estimates of (24,25,28\%). While that is far less precise than (e.g.) measurements of the speed of light (299,792.458 $\frac{m}{s}$), such an estimator is certainly good enough for detecting if a project is under-staffed and hence in danger of technical debt.
+\item
+Different projects in \fig{effort} used different {\em instruments} 
+to {\em yield} best estimates. That is, like our Figure~2 results, we cannot assume that one standard  {\bf instrument} will suffice for different projects. 
+\item 
+All the {\em rank=1} error estimators include at least one {\bf instrument} that has been {\bf tuned} by a hyperparameter  optimizer. That is, PI Menzies   already has the
+technology that checks if empirical SE {\em instruments} can be successfully {\bf tuned} to computational science (in this case, {\bf instruments} that   recognize suspicious levels of staffing and, hence,   will  suffer technical debt).
+\ei
+However, just to repeat the main theme of this proposal,
+it is an open question if the empirical SE methods used to generate results like \tbl{SATD} and
+\fig{effort} can be applied to computational science projects. Nor is is known
+if our current {\em tuning} methods for estimation {\bf instruments}
+are sufficient to recognize projects prone to
+technical debt in computational science projects.
+
+Hence, we propose adding all the {\bf tuning} and estimation {\bf instruments} of  \tbl{SATD} and \fig{effort} to {\IT}, then testing   them on the data of \tbl{samples}
+(and adjusting the {\bf tuning} methods, if necessary).
+ 
+
+
+% In the $21^{st}$ century, in the age of agile programming\footnote{Traditionally, software developed using a {\em waterfall model}~\cite{Royce:1987} where requirements are written and frozen before the coding.
+% This proved to be cumbersome approach, especially
+% for code being prototyped to explore
+% new ideas (which is a common task for scientific
+% software). This century, the watermodel
+% is usually deprecated for an 
+% {\em agile model}~\cite{fowler2001agile}
+% where there exists a continually changing set of desired requirements which developers regularly re-prioritize
+% before implementing
+% the most valuable requirement next.
+% } the test problem grew worse.
+% In the agile world, the code
+% is continually changing and the challenge is to
+% keep the tests up-to-date with the software.
+% Agile advocates of ``test-driven development''~\cite{beck2003test}
+% proposed writing the test case {\em first},
+% then building just enough code to get that test to pass. This principle became so popular that it ended up swamping the development process. Between January and October 2013, Google ran three billion unit tests. Maintaining this test code became more effort that maintaining the code itself. Worse still, the
+% time required to run this massive  test suite was over two calendar weeks (even with all Google's superior hardware support)~\cite{Elbaum:2014,}.
+
+% Given this pressure from the agile community,
+% the nature of testing has changed. Given test suites take so long to run, the issue is now less of ``how to find all bugs'' but instead ``how to reduce the time required to get some feedback on the bugs in the code''. To that end, 
+
+% The testing problem grew worse
+% Later on, in the age of agile programming,
+% the nature of the testing problem changed.
+% Since testing 
+% as test methods grew complex and test suites grew longer to run, it was no longer possible to instantly assess code. Rather, it could take hours to days to weeks to (e.g.) build the formal models needed to run (e.g.) the automatic verification tools to assess software. And even then, the conclusion were only as tate that not bugs were found which is a very different to sayng that no more bugs could be found.
+
+ 
+
+%\subsection{Endeavoring to Estimate Development Effort}\label{tion:effort}  
+
+%\subsection{Endeavoring to Avoid Spurious Warnings}\label{tion:falsealarm}
+
+
+% These claims are based on some initial work funded as part of an EAGER grant.
+% The rest of this section discusses the technical details
+% required to (a) test these claims using more data from the computational  science community;
+% (b) then use the insights from that process to propose innovative methods for helping computational scientists build and maintain better software using fewer resources.
+
+
+
+% beck2003test
+
+% technoiiques appy elshewere
+
+% results of Figure~2 were achieved using such simple goal-aware discretizers.
+% details: explore all the current projects and not just the 11 explored in\fig{refgreen}.  and more besides
+% It turns out that programmers
+% hyperparamter optimization
+
+% active elarning
+
+% \subsection{Science and Engineering challenges}
+% Computational science   explores natural phenomena 
+% at both very large scale (e.g. hurricanes) and very small scale
+% using (e.g.) micro-level finite elements analysis. Such software is applied to 
+% astronomy, 
+% astrophysics, 
+% chemistry, 
+% climate+weather prediction, 
+% economics, 
+% genomics, 
+% molecular biology, 
+% oceanography,
+% physics, 
+% political science, 
+% and many fields of engineering.
+
+% In response to current NSF programmatic areas of interesting, this proposal offers data engineering
+% software that   apply automated
+% empirical software engineering (SE)
+% methods to  computational science projects that make extensive use of software. The proposed {\IT}
+% workbench\footnote{ Short for 
+% \underline{S}oftware \underline{E}ngineering \underline{N}ow 
+% \udnerline{T}ackles   your code \underline{R}emotel\underline{Y}.}
+%  will  sustain progress in the CISE field  by positively impacting the computational community's ability to  create  and maintain   higher quality software. This, in turn, will enable faster and better the software development  that that enables more and better and faster computational science.
+
+
+% Recent results from  an EAGER ``Empirical SE Methods for Computational Software''
+% suggest both an opportunity and a challenge for the computational science community.
+% PI Menzies found that standard empirical software engineering (SE) methods:
+% \bi
+% \item Fail badly on computational science software, if used in the standard ``off-the-shelf'' manner;
+% \item But succeed very well if those standard methods are tuned to the particulars of computational
+% science (specifically, as discussed below, if those methods are tuned to
+% the language used by computational  scientists to describe ``defects'').
+% \ei
+% This result leads to the conjecture that many other empirical SE methods {\em might} be suitable for
+% computational science, but only if those methods are first especially adapted to the domain
+% of computational science.
+
+% This proposal tests that conjecture.  If successfully, then a large number of automatic quality
+% agents could be applied to numerous computational science software. This, in turn, would lead
+% to better and faster creation of maintenance of the software needed to 
+% support the computational science ecosystem.
+ 
+
+
+
+\section{Management Plan}\label{tion:plan}
+
+The previous section described ``what''  {\bf yields} we can collect from  different {\bf endeavors}.
+This section describes ``how'' we will use those {\bf yields}, plus some other metrics,
+to explore  Claims 1,2,3,4,5 from \tion{intro}.
+
+In the following:
+\bi
+\item
+  The metrics \#2,4,7,8,9 (described below)  address the claims listed in \tion{intro} while the
+ other metrics address   specific requirements
+of the CSSI solicitation.
+\item
+Most of the following metrics are qualitative in nature. The exception is Metric \#8
+which will allow a rigorous statistical test of the value of {\IT}. For more on those tests,
+see the discussion on {\bf Claim5} at the end of \tion{other}. \ei
+\noindent
+\subsection{Architecture}   {\IT} will be written in JAVA/Python and 
+combine tools from several existing open source toolkits such as 
+Scikit-Learn~\cite{scikit-learn}, jMETAL~\cite{durillo2011jmetal}, and Commit.Guru~\cite{commitguru}.
+To that suite of software we will add tools recently developed in PI Menzies's lab including
+the data processors of Agrawal etl'18~\cite{agrawal2017better}; 
+the FLASH hyperparameter  optimizer~\cite{nair2017flash};
+the FASTERAD active learner~\cite{Yu:2018,Yu2019}; as well as code
+from several other prototoypes (all the code used to generate the    Figure~2 result;
+the test prioritization methods tested in \fig{relative};  
+the warning analyzer used in    \fig{warn};  
+and the technical debt analysis tools used in \tbl{SATD},
+\fig{warn}~\cite{xia19}). Further, as the research in our lab continues,
+we foresee that other, newer, tools will also be added to {\IT}.
+
+
+
+
+
+{\IT} will also contain data files holding all the features we extracted from \tbl{samples}. This is useful
+since it will allow other researchers to quickly repeat/improve/refute our results without having
+to first perform tedious web-scale data collection.
+
+{\IT} will also contain the source core required to reproduce 
+our proof-of-concept papers (discussed below). For example, if  a  paper
+has research questions RQ1, RQ2, then our code will come with shell scripts
+ RQ1.sh, RQ2.sh etc that store the code we executed to answer the research questions.
+
+
+\subsection{Adaptability to New Technologies} Toolkits like Scikit-Learn and jMETAL
+  are currently the international distribution method
+for new data mining and optimization
+algorithms. Hence, whenever Scikit-learn or jMETAL changes, {\IT} will be positioned to access
+and use the  latest innovations  
+
+\subsection{Adaptability to Changing Requirements}
+As stated above, this proposal will use {\IT} to explore the four {\bf endeavors}
+described above as well as  other tasks as time and opportunity permits and as requested by computational scientists.
+We will maintain a roadmap document so that if (for pragmatic reasons)
+we cannot currently explore a particular new requirement,
+our users will know when they can expect that new functionality.
+
+
+\subsection{Delivery and Outreach Mechanism}\label{tion:outreach}  {\IT} will
+be licensed
+open source and
+stored in a public
+ repository
+ that anyone can download and run on their own machines. When executed, these tools
+can automatically  work through on-line data from computational science projects.  
+
+
+{\IT}
+will be delivered using Github (i.e. using the
+{\tt git clone} command)\footnote{If possible, we will also offer Docker files to distribute our system.
+That said, the practicality
+of that proposal has to be assessed further once we know the size of the shared data sections
+in {\IT}.}. 
+
+We anticipate  that {\IT} will need no proprietary licensed products. Hence  {\IT}
+will cost \$0.
+
+
+As to outreach,
+ we would work with the organizers of the annual $SI^2$ PI meeting to arrange focus groups at that meeting
+ (so we can have detailed  interaction with interested developers).
+In-between the $SI^2$ PI meetings, we would also 
+run tutorials on our tools (and related concepts in Empirical SE)
+at the PEARC conference (one per year)
+as well as webinars
+for XSEDE  
+and the Sciences Gateways series (whenever we have anything interesting to report).
+Accordingly, we will log and report:
+\bi
+\item {\em METRIC0: Number of tutorials given on this material.}
+\ei
+
+\subsection{Timeline}
+In the first few months of the project, in order to quickly obtain more initial results (which we can use to popularize this project
+and raise its profile in the computational science community), we will apply {\IT} to extend the case study of Figure~2, using the rest of the projects in \tbl{samples}.
+After that, for the first two years of this work we will spend six months on each
+of the endeavors (a)(b)(c)(d) listed in \tion{ende}. 
+For the third year, we will look over our tools to see what can be generalized, improved, simplified. This will lead to a code re-organization.
+Apart from that, in all years:
+\bi
+\item
+We will not have releases {\em per se} but a continuous integration
+of development and code, ready to be used.
+To that end, {\IT}
+will be stored open source and on-line to be freely available during+after
+this proposal. That is,  just as soon as our tools get useful, they will be
+available to the general computational science community.
+\item
+We will use {\IT} to generate numerous proof-of-concept reports;
+i.e. two to four research publications per year, ideally
+at top-ranked values.
+These proof-of-concept papers would be our reports on what happens when we applied 
+empirical SE methods to computational science projects. 
+\ei
+Accordingly we will log and report:
+\bi
+\item {\em METRIC1: Number of written/published proof-of-concept papers.}
+\ei
+\subsection{Reproduciblility }
+ As stated above,
+all our proof-of-concept papers will come with on-line replication packages
+with scripts labelled RQ1.sh, RQ2.sh etc that store the code we executed to answer the research questions
+of those papers. 
+
+
+\subsection{Testing and Documentation}
+The proof-of-concept reports will be the
+systems-level tests of {\IT}.
+As to documentation, we   commit to  maintaining  the standard of documentation proposed
+in the Code Carpentry  paper {\em Good Enough Practices for Scientific Computing}~\cite{Wilson16} which include an {\tt INSTALL.md} files describing downloading
+an installation plus {\tt README.md} files describe example usages of the system.
+As to other documentation, we will use a literate  programming style of documentation; i.e.
+or Jupyter notebooks;  
+ code and classes docs generated  from  code,
+presented in a public  {\tt /docs} directory in
+our repos.
+
+
+
+\subsection{User Interactions} We would create a simple on-line registration Google
+form  where interested developers can register their repository with us. Accordingly, we will log and report: 
+\bi
+\item {\em METRIC2: How many projects register themselves for our service.}
+\ei
+Our agents will then analyze the 
+registered projects using our automatic agents,
+posting   issue reports back to those repositories.
+Accordingly, we will log and report: 
+\bi
+\item {\em METRIC3: Number of projects analyzed.}
+\ei
+We will  track if those issues
+are ever acted on by  projects (and if none are, then that would indicate our tools are reporting
+irrelevancies). Accordingly, we will log and report: 
+\bi
+\item {\em METRIC4: How computational scientists change their projects
+in response to our recommendations.}
+\ei
+As to day-to-day support of teams using our tools,
+some of  their time will be dedicated
+to offering   support and advice to  those computational science teams.
+Accordingly, we will log and report
+\bi
+\item {\em METRIC5: Number of help requests from how many projects (trying to run our tools on their code).}
+\ei
+Since our code will be on-line in a web-accessible repository, we will also be able
+to gauge the community's interest in our work via the number of pull requests and issue
+or
+bug reports posted to our repository:
+\bi
+\item {\em METRIC6: Number of pull requests and issue or bug reports.}
+\ei
+\subsection{Security} 
+We do not anticipate security issues for this project since we will using data that the projects are already placing on-line.
+
+ 
+ 
+\subsection{Other Metrics}\label{tion:other}
+The above Metrics \#2,4,5,6 (as well as some that follow)  measure
+user involvement in this project. They also let us see to what extent
+users accept our new tools.
+
+The rest of this section discusses the metrics required
+to explore  the
+five claims of \tion{intro}.   
+
+To  explore   {\bf Claim1 = relevance}, we must try
+to interest   computational scientists in our methods.
+For that task, we will use the above mentioned
+Metrics \#2,4.    That is to say, we will use computational scientist to judge if what we are doing
+is worthwhile.  Note that we all ready have some preliminary indications that we may do well
+according to Metric \#2 (see the 11 letters collaboration attached to this proposal).
+
+Given the wide ranging nature of this
+proposal, it may not be true that all our future
+work as simple as seen in the Figure~2 case study.
+Therefore, to explore  {\bf Claim2 = operational} we must log and report:
+\bi
+\item {\em METRIC7: The human effort
+ required to apply the SE {\bf instrument}.} 
+\ei
+Metric \#7 will record how hard for humans to  {\bf tune} and {\bf instrument} for computational
+science. But are their any benefits justified with respect to  the cost of {\bf tuning}?
+To make that assessment, in order to justify,
+ \mbox{{\bf Claim3 = must adjust}}, we must log and report:
+\bi
+\item {\em METRIC8: compare the  performance 
+scores {\bf yielded}
+using standard empirical SE {\bf instruments}, before and after {\bf tuning}.}
+\ei
+Note that one unlikely, but very useful result,
+would be that the {\bf yield} does not
+increase after {\bf tuning}
+standard empirical SE methods for computational
+science projects. In that case, {\bf Claim3} would be refuted.
+Having recorded that possibility, we note that this is very unlikely.
+Firstly, the nature of computational science software is very different to the Google- and Facebook- and Microsoft- style of projects used to develop current empirical SE
+methods. Secondly, the experience of Figure~2 is that significant adjustments are required
+to standard empirical SE methods before they are effective for computational science.
+
+To explore {\bf Claim4 = practical}
+we must log and report the effort required to 
+adjust SE methods to computational science; specifically:
+\bi
+\item {\em METRIC9: the CPU time or other platform  costs
+required to complete tuning.}
+\ei
+This metric is subtly different to Metric \#7. In the prior metric, we checked
+the difficulty for humans to wrangle together a working system. In this metric we 
+measure the cost of the hardware systems (computer hardware,  cloud compute costs, CPU time).
+This is an important point since some {\bf tuning}
+{\bf strategies}
+can be impractically slow~\cite{abs-1807-11112},
+particularly if those {\bf strategies} need to be repeated
+many times during a rapidly evolving software project.
+Worse, if those {\bf strategies} themselves have
+to be changed from project to project there we
+would be unable to offer any guidelines on how to best
+{\bf tune} the next project.
+
+To explore  {\bf Claim5 = valuable}, we would reuse
+{\em Metric8} and reflect on the 
+  {\em size} of the {\bf yield} difference seen after
+  applying empirical SE methods (with or without
+  {\bf tuning}, depending on the results of {\bf Claim3}).
+  \bi
+  \item
+  This test would use some statistical significance and
+  effect size test (e.g. a 95\% bootstrap sample and Cliff's Delta).
+  \ei
+  Note that if,
+  at the end of the day, empirical SE offers very
+  little benefit for computational  science, then we would reject Claim5 and declare
+  a negative result from this research.
+  
+  
+
+%\input{sample} 
+%\input{sample-commits}
+%\input{features}
+
+ 
+ % Before explaining our plan, we note that  
+% understanding the literature is not some
+% deterministic ``on size fits all'' process. Rather, in our experience, 
+% it is an  exploratory process where  analytics 
+% struggle to tame some knowledge source by trying
+% a range of methods. 
+% In order to support such an exploratory process it is important {\em not} to offer
+% one tool but rather {\em workflow construction} tools where analysts can mix-and-match between various utilities.  For  a sample of such uitlities,
+% see \tbl{overview}.
+
+ 
+	%\centering
+	%\caption{Project Schedule}
+	%\label{table-schedule}
+
+ 
+\newpage\section{Intellectual Merit and Broader Impact}
+\label{sec:IM-BI}
+\subsection{Intellectual Merit}
+This work applies novel active learning and hyperparameter  optimization methods to tasks
+that are  central
+to the process of software development;
+e.g. defect prediction, test case prioritization,
+avoiding technical debt, etc.
+Also, this work explores how to extend prior standard
+SE methods to new kinds of software.
+Emprical  SE has been mostly developed for Facebook-, Google- and Microsoft- style software. These three
+organizations
+are hardly representative of the vast
+ranges of  different software types in contemproary practice.  The methods of this proposal 
+ could be used to better adapt empirical SE to any other fields of endeavor.
+
+
+ 
+
+\subsection{Broader Impact:} 
+We focus on an issue of tremendous economic importance- the creation of better quality software which in turn will be used to find new state-of-the-art research results
+in astronomy, astrophysics,chemistry, weather prediction, economics,  genomics,  molecular   biology,    oceanography, physics,  political  science,  and many engineering fields.
+For industrial and academic sectors, this work will accelerate global innovations by improving quality and quantity of computational scientific studies.
+
+The PI   teaches senior-level and graduate-level empirical SE, and data  mining classes (and in those data mining classes, all the case studies come from software  engineering). All of the technology developed in this proposal will become case study material for those subjects.  
+ 
+PI Menzies will continue his established tradition of graduating research students for historically under-represented groups. This work will inform the curriculum of  the various NC State  NSF-funded REUs (research experience for undergraduates)
+In that program, places are reserved for students from traditionally under-represented areas; e.g. economically challenged regions of the state of North Carolina) and/or students from universities lacking advanced research facilities. While some of the concepts of this grant would be too advanced for that group, some of the simpler concepts and case studies would be suitable for lectures.
+  
+
+% \paragraph{7.3. Integration of Teaching and Research}
+% Much of the research in this project will also be integrated into a
+% classroom environment.  The PI teaches senior-level and graduate-level
+% SE, and software analytics   classes (and in those data mining
+% classes, all the case studies come from software engineering). All of
+% the technology developed in this proposal will become study
+% material for those subjects.  Replication studies are especially ripe
+% for classroom projects.  Also, through our publications and conference
+% work, we would publicize these tools as widely as possible with the
+% intent of supporting a broader community working with this approach.
+
+% \paragraph{7.4 Participation of Underrepresented
+%   Groups} The PI will continue their established tradition of
+% graduating research students for historically under-represented
+% groups.  PI Menzies' last two Ph.D. students were an African-American
+% women and a gentleman from an economically disadvantaged region
+% in central Pennsylvania.  Also, each summer, the PI's department runs an NSF-funded REU
+%  (research experience for undergraduates)
+% on the ``Science of Software''.
+%  At this
+% program, places are reserved for students from traditionally
+% under-represented areas (e.g. economically challenged regions of the
+% state of North Carolina) and/or students from universities
+% lacking advanced research  facilities.
+% Some of the simpler data mining concepts for this proposal would be suitable for lectures and REU projects.
+
+
+
+%\input{f/under}
+\subsection{Dissemination of Knowledge}
+As described above in \tion{plan} (and, in particular, \tion{outreach}) much of the effort
+of this proposal is devoted to reaching out to
+the computational science community and including them
+in the usage and evolution of {\IT}. 
+Apart from that, the PI has  an extensive track record of publishing at senior SE venues and so, it should be expected that the results of this work will be widely visible.
+
+Moreover, the PI has a long history of publishing papers along with reproduction packages holding the data and the scripts required to replicated the papers' results. 
+All the our methods used here will be based around software tools in widespread use (Github, Travis CI, etc). 
+We will release all our tools via open source licenses so our results can be readily applicable to researcher or developers using Github, etc. 
+
+ 
+\section{Prior Results}
+\label{sec:PriorResults}
+
+
+
+This proposal is the next logical step in the PIs's work on analytics and text mining
+{PI Menzies} has worked extensively in that arena.
+Most  recently, Co-PI Menzies worked on \underline{(a)}~CCF-1302216, 2013-2107, \$271,553;   \underline{(b)}~``SHF: Medium: Collaborative: Transfer Learning in Software Engineering''. 
+\underline{(c)}~The {\bf intellectual merit} of that work was to
+define novel methods for sharing data, many of which were the precursor to the methods of this proposal.  That work generated the publications  \underline{(d)}~\cite{krishna2018bellwethers,PetersML15,krishna16,he13,Me17,fu2016tuning,krishna2017learning} concerning prediction and planning methods.
+The {\bf broader impact} of that work was to
+enable a new kind of open science-- one where all data is routinely shared and is capable of building effective models no matter if it is obfuscated for security proposes.
+The methods of this project, while targeted at software engineering, could also be applied to any other data intensive field.   
+ \underline{(e)}~Data from that work is now housed at the SEACRAFT publicly accessible repository~\cite{seacraft}. That work  funded two Ph.D.s at NCSU. \underline{(f)}
+N/A.  
+
+Another relevant research grant is 
+\underline{(a)}~OAC-1826574, 2018-2018, 
+\$124,628.00;
+\underline{(b)}-
+``EAGER: Empirical Software Engineering for Computational Science'';
+\underline{(c)}~That work lead to the Figure~2 results
+shown in this proposal.
+The {\bf intellectual merit} of that work was to
+conduct initial explorations into novel methods for adapting SE methods to computational science.
+The {\bf broader impact} is the same as this work.
+\underline{(d)}~That work generated one conference paper~\cite{abs-1807-11112}
+and another journal publication under review publications.
+ \underline{(e)}~Data from that work is now housed at the SEACRAFT publicly accessible repository~\cite{seacraft}. That work  funded one Ph.D. at NCSU. 
+ \underline{(f)} N/A.  
+
+
+
+
+
+%There are other grants that could be listed here but as we understand recent changes to NSF grant guidelines, the above are all that is allowed/required.
+
+\end{nsfdescription}
+
+\begin{nsfreferences}
+      \bibliography{proposal,zhe,unsuper,sherry,fahmid}
+\end{nsfreferences}
+%\Facilities{part_facilities_combined}
+%\BudgetJustification{University of Alabama}{alabama_budget}
+\newpage
+%\section*{Facilities}
+\begin{Facilities}{North Carolina State University}
+
+\section*{Offices:}
+The project PI has
+and offices in their   CS Department.  This
+department
+has adequate space to house all research assistants
+working on this project. All offices are wired for high-speed network
+access.
+
+The PI's departments at  NC State provide the space and basic networking services to
+carry out the experiments, secretarial and administrative support as
+well as general-purpose office equipment ({\em e.g.}, fax, photocopiers,
+etc.).
+
+\section*{Lab Space}
+The PI has their own lab space at   NC State.
+PI  Menzies' RAISE lab (Real-World 
+AI and SE) is a newly renovated space 
+containing over 1,500 ft\textsuperscript{2} of research space and 
+15 cubicles, a meeting space, printer, and wide screen projector. 
+
+\section*{Compute Facilities}
+Part of {\IT} will involve comparatively assessing different 
+technologies.   For that process, it will be useful to have some large scale compute facility.
+ 
+ At NCSU, students working on this grant will have access to  a 108-node compute cluster named ARC with 
+2,000 cores (AMD Mangy-Cores), Infiniband QDR interconnect, per node
+power monitoring, GPUs and SSDs and parallel file system support,
+which was funded by an NSF CRI that he is the main PI of together with
+5 co-PIs.  
+The ARC facility is providing local and remote researchers with
+administrator/root privileges for Computer Science experiments at
+medium scale. This allows any of the software layers, including the
+operating system and Infiniband switch network routing tables, to be
+modified for experimental purposes, e.g., to experiment with different
+network topologies.  For large-scale demonstrations, other 
+facilities will be utilized (the HPC discussed below.
+
+
+Additionally, NC State University provides a High-Performance Computing (HPC) facility as a part of the initiative to provide state of the art support for research and academic computing. HPC system (called henry2) provides NC State students and faculty with entry and medium level high-performance research and education computing facilities, consulting support and scientific workflow support. The HPC ecosystem consists of 1233 dual Xeon compute nodes in the henry2 cluster. Each node has two Xeon processors (mix of dual-, quad-, six-, eight-, ten-core, twelve-core) and 2 to 6 GigaBytes of memory per core. The total number of cores increases as more cores are purchased and now exceeds 10000. The nodes all have 64-bit processors. All HPC projects have capability to run jobs using up to 128 processor cores up to 48 hours and smaller jobs up to a week.
+
+%This platform can be used for software development of integrated
+%architectures. We plan to experiment on multiple Intel Core i7 x86
+%CPU/GPU platforms, AMD APUs, and 2 NVIDIA Tegra TK1 development kits
+%in our lab. We also we plan to acquire additional integrated platforms
+%as part of this grant, including an Intel Xeon Phi (Knight's Landing).
+
+% \paragraph{Remote Computing Resources:}
+% The PI has access to the GPU cluster and Infiniband cluster at the
+% Thomas Jefferson National Accelerator Facility of the U.S. Department
+% of Energy. The GPU cluster includes 117 Intel Nahalem nodes, equipped
+% with over 200 Tesla S1070 in total and connected with QDR or SDR
+% Ininiband. The Infiniband cluster contains three sub-clusters. One
+% contains 224 nodes, each equipped with dual quad-core 2.53 GHz
+% Westmere CPUs, 24 GB memory, and QDR (40 Gb/s) Infiniband; one
+% contains 320 nodes, each equipped with dual quad-core 2.4 GHz Nehalem
+% CPUs, 24 GB memory, and QDR (40 Gb/s) Infiniband; another contains 392
+% nodes, each quipped with dual quad-core 1.9 GHz Opteron CPUs, 8 GB
+% memory, and DDR (20 Gb/s) Infiniband.
+\end{Facilities}
+% \CommunityOutreach{old/nsf_community}
+\DataManagementPlan{old/nsf_data}
+\ProjectPersonnel{old/nsf_personnel}
+% \ProjectRoles{old/nsf_roles}
+\end{document}
