@@ -148,18 +148,9 @@ Choosing is Unfair (The TINKER Project)}
 \vspace{5mm}
  \noindent
 \underline{{\bf INTELLECTUAL MERIT:}} 
-This novel work applies active learning and hyperparameter  optimization methods to tasks
-that are  central
-to the process of software development;
-e.g. defect prediction, test case prioritization, avoid spurious warnings, avoiding technical debt, etc.
+This novel work applies multi-objective optimization to find optimal hyperparameters for the machine learning model to reduce software discrimination i.e. to solve the accuracy-fairness trade off in the machine learning model.
 
-Moreover, this work explores how to extend prior standard
-SE methods to new kinds of software.
-Empirical SE has been mostly developed for tech giant (e.g. Facebook-, Google- and Microsoft-) style software. These three
-organizations
-are hardly representative of the vast
-ranges of  different software types in contemporary practice.  The methods of this proposal 
- could be used to better adapt empirical SE to any other field of endeavor.
+This work explores how to extend and utilize existing SE and ML practices to find and solve this software discrimination problem. SE domain has always focused on model's performance disregarding any inherent bias the model is introducing in decision making. The methods in this proposal could be used to better understand the discrimination introduced in decision making by models and ways to remove this without suffering from performance bottleneck.
 
 
  
@@ -167,18 +158,15 @@ ranges of  different software types in contemporary practice.  The methods of th
 \vspace{5mm}
 \noindent
 \underline{{\bf BROADER IMPACTS:}}
-We focus on an issue of tremendous economic importance---the creation of better quality software which in turn will be used to find new state-of-the-art research results
-in astronomy, astrophysics, chemistry, weather prediction, economics,  genomics,  molecular   biology,    oceanography, physics,  political  science,  and many engineering fields.
-For industrial and academic sectors, this work will accelerate global innovations by improving quality and quantity of computational scientific studies.
+We focus on an issue of tremendous socio economical importance - many high-stake applications such as finance, hiring, admissions, criminal justice use algorithmic decision-making frequently. In some cases, machine learning models make better decisions than human can do. But there are many scenarios where machine learning software has been found to be biased and generating arguably unfair decisions. For industrial and academic sectors, this work proposes a fairness testing and optimizing for every machine learning model to generate fairer results, thus removing the ``discrimination problem''.
 
-The PI   teaches senior-level and graduate-level empirical SE, and data  mining classes (and in those data mining classes, all the case studies come from software  engineering). All of the technology developed in this proposal will become case study material for those subjects.  
- 
 PI Menzies will continue his established tradition of graduating research students for historically under-represented groups. This work will inform the curriculum of  the various NC State  NSF-funded REUs (research experience for undergraduates)
+
 In that program, places are reserved for students from traditionally under-represented areas; e.g. economically challenged regions of the state of North Carolina) and/or students from universities lacking advanced research facilities. While some of the concepts of this grant would be too advanced for that group, some of the simpler concepts and case studies would be suitable for lectures.
 
 \vspace{5mm}
 
-\noindent \underline{{\bf KEYWORDS:}} computational science, empirical software engineering, software analytics
+\noindent \underline{{\bf KEYWORDS:}} fairness, empirical software engineering, software analytics
 \end{nsfsummary}
 
 
@@ -195,13 +183,13 @@ In that program, places are reserved for students from traditionally under-repre
 
 
  \section{Introduction}\label{tion:intro}
- why not just throw away the attributes? not alldata sets are like adult etc. They may be inexerably
+ why not just throw away the attributes? not all data sets are like adult etc. They may be inexerably
  connected to the goal. So a learner will have to use them. goal then is ti use them the least amount.
  
-And if that dones not convince you, and you still want to discard them, Cant assess if they are useless (abd can be thrown away) if you dont see how well you can do without them or with minimal use of the those attributes. So something like TINKER is essential, just to gauge the extent to which the current data aset hasa. group discrimiantion problem.
+And if that does not convince you, and you still want to discard them, Cant assess if they are useless (abd can be thrown away) if you dont see how well you can do without them or with minimal use of the those attributes. So something like TINKER is essential, just to gauge the extent to which the current data set has a group discrimination problem.
 
-Lastly,we point out that if we list attributes to be trown away, that broadacts to someoe that this dat set has important effects included in the 
-discared set. This is the last thing any data provideor wnat sto broadcast to the broader community
+Lastly,we point out that if we list attributes to be thrown away, that broadcast to someone that this data set has important effects included in the 
+discarded set. This is the last thing any data provider wants to broadcast to the broader community.
 
 
 \begin{wrapfigure}{r}{4.5in}
